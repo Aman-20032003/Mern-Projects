@@ -1,0 +1,6 @@
+class Person {
+    greeting() {
+        console.log("Hello from Person class");
+    }
+}
+module.exports = Person;

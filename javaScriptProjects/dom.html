@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg-black{
+            background-color: black;
+color: wheat;
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <!-- <div >
+
+        <h1 id="title" class="heading">DOM LEARNING</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis perspiciatis, nihil vitae soluta placeat praesentium fugit inventore cupiditate tempore asperiores eligendi temporibus laboriosam optio molestiae consequuntur nesciunt molestias nostrum repellendus!
+        </p>
+        <li>
+            <ul class="list">first</ul>
+            <ul class="list">second</ul>
+            <ul class="list">third</ul>
+        </li>
+    </div> -->
+
+    <div class="parent"> 
+    <div class="day"> monday</div>
+    <div class="day">tuesday</div>
+    <div class="day">wednusday</div>
+</div>
+</body>
+
+<script>
+const parent= document.querySelector(".parent");
+// console.log(parent);
+// console.log(parent.children);
+// console.log(parent.children[1].innerHtml);
+
+// for (let index = 0; index < parent.children.length; index++) {
+//   console.log(parent.children[index].innerHtml);
+//   }
+
+// console.log(parent.firstElementChild);
+// console.log(parent.lastElementChild);
+
+const dayOne= document.querySelector('.day');
+// console.log(dayOne);
+// console.log(dayOne.parentElement);
+// console.log(dayOne.nextElementSibling);
+console.log(parent.childNodes);
+
+
+
+
+
+</script>
+</html>

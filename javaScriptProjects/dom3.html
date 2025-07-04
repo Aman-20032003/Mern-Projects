@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div >
+    <ul  class="language">
+        <li>javascript</li>
+    </ul>
+    </div>
+</body>
+
+<script>
+    //add
+    function addOptiLanguage(lang){
+        const li= document.createElement("li")
+        li.appendChild(document.createTextNode(lang));
+        document.querySelector('.language').appendChild(li);
+
+    }
+    addOptiLanguage("python")
+    addOptiLanguage("java")
+    addOptiLanguage("go")
+//edit
+const firstLang= document.querySelector("li:nth-child(2)");
+console.log(firstLang);
+
+const newLi= document.createElement("li")
+newLi.innerText="mojo"
+firstLang.replaceWith(newLi);
+
+//edit2
+const secondLang= document.querySelector("li:nth-child(2)");
+secondLang.outerHTML='<li>type</li>';
+
+//remove
+
+const lastLang= document.querySelector('li:last-child');
+
+lastLang.remove();
+</script>
+</html>

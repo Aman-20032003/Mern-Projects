@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>User Registration</title>
+</head>
+
+<body>
+
+  
+    <form id="registerForm">
+      <h2>SignUp</h2>
+      <input type="email" id="email" placeholder="Email" required /><br><br>
+      <input type="password" id="password" placeholder="Password" required /><br><br>
+      <label for="role">Role:</label>
+      <select id="role" name="role" required>
+        <option value="" disabled selected>Select your role</option>
+        <option value="STUDENT">Student</option>
+        <option value="EMPLOYEE">Employee</option>
+      </select><br><br>
+      <button type="submit">Register</button>
+      <p style="text-align:center; margin-top:10px; ">
+        Already have an account? <a href="UserLogin.html" id="showLogin">Login here</a>
+      </p>
+    </form>
+    <p id="responseMessage"></p>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        color: #ffffff;
+      }
+      
+      a{
+        color:#ff5555;
+      }
+      form#registerForm {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 40px;
+        border-radius: 20px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 28px;
+        color: #00ffff;
+        text-shadow: 0 0 5px #00ffff88;
+      }
+
+      form#registerForm input {
+        width: 100%;
+        padding: 14px;
+        margin: 12px 0;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid #00ffff44;
+        border-radius: 10px;
+        color: #ffffff;
+        font-size: 15px;
+        transition: 0.3s ease;
+      }
+
+      form#registerForm input:focus {
+        border-color: #00ffff;
+        outline: none;
+        background: rgba(0, 255, 255, 0.1);
+      }
+
+      form#registerForm button {
+        width: 100%;
+        padding: 14px;
+        background: #00ffff;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        box-shadow: 0 0 10px #00ffffaa;
+      }
+
+      form#registerForm button:hover {
+        background: #00cccc;
+        box-shadow: 0 0 20px #00ffff;
+      }
+
+      #responseMessage {
+        text-align: center;
+        margin-top: 15px;
+        color: #ff5555;
+        font-weight: bold;
+      }
+
+      #adminLoginOptions button:hover {
+        background: #00cccc;
+        box-shadow: 0 0 20px #00ffff;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+
+    <script>
+  document.getElementById("registerForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const role = document.getElementById("role").value;
+
+    const userData = { email, password, role };
+
+    let url = "";
+    if (role === "STUDENT") {
+      url = "http://localhost:8080/student/registeration";
+    } else if (role === "EMPLOYEE") {
+      url = "http://localhost:8080/employee/registeration";
+    } else {
+      document.getElementById("responseMessage").textContent = "Please select a valid role.";
+      return;
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const result = await response.json();
+      console.log("Response:", result);
+
+      if (response.ok) {
+        alert("Registered! Please check your email for a verification code.");
+        localStorage.setItem("emailForVerification", email); 
+        window.location.href = "VerifyEmail.html"; // 
+      } else {
+        alert(result.message || "Registration failed. Please verify your email.");
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
+      document.getElementById("responseMessage").textContent = "Error occurred!";
+    }
+  });
+</script>
+
+</body>
+
+</html>
