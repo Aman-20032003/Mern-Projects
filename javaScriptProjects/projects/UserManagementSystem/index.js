@@ -1,17 +1,52 @@
-const express =require('express');
+require('dotenv').config();
+const express = require('express');
 const mongoose = require('mongoose');
- const userRouter= require ('./routes/UserRoute');
-const PORT = 8001;
- const app = express();
+const userRouter = require('./routes/UserRoute');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+
+const app = express();
+const PORT = process.env.PORT;
+
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/user_management_system", {
+app.use(cors({
+  origin:'http://127.0.0.1:5500',
+  credentials:true
+}));
+
+app.use(cookieParser());
+
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
 app.use('/user', userRouter);
 
- app.listen(PORT,()=>{
-console.log(`server is running on PORT ${PORT}`);
+app.get('/user/validate', (req, res) => {
+  const token = req.cookies.token;
+  console.log("Cookies:", req.cookies); 
 
- })
+  if (!token) {
+    return res.status(401).json({ message: "Token not found" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET);
+    console.log("Decoded token:", decoded); // ✅ Debugging
+
+    return res.status(200).json({
+      success: true,
+      userId: decoded.id, // ✅ will now work if above fix is applied
+      email: decoded.email
+    });
+  } catch (err) {
+    console.error("Token verification error:", err); // ✅ Log the error
+    return res.status(401).json({ message: "Invalid or expired token" });
+  }
+});
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

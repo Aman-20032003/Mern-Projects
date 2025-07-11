@@ -1,5 +1,4 @@
 
-
 const argon2 = require('argon2');
 const User = require('../Models/UserModel');
 
@@ -12,19 +11,19 @@ async function registeration({email,userName,password}) {
             message: 'user already exists'
         }
     }
-    else if (!email.trim()) {
+    else if (!email?.trim()) {
         return {
             status: 400,
             message: 'Email Is Required'
         }
     }
-    else if (!password.trim()) {
+    else if (!password?.trim()) {
         return {
             status: 400,
             message: 'Password Is Required'
         }
     }
-    else if (!userName.trim()) {
+    else if (!userName?.trim()) {
         return {
             status: 400,
             message: 'UserName Is Required'
