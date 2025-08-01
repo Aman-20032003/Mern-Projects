@@ -1,0 +1,35 @@
+body{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: gainsboro;
+}
+.wheather{
+     background-color: aliceblue;
+}
+.card{
+    
+     padding: 10px;
+     box-shadow: rgba(243, 249, 255, 0.2) 0px, 8px,24px;
+     border-radius:  20px;
+     background-color: aliceblue;
+     
+}
+.input input {
+  border: none;
+  outline: none; /* Removes the blue outline on focus */
+  border-radius: 10px;
+  font-size: 15px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 8px 12px;
+}
+
+
+.button{
+border: none;
+outline: none;
+padding: 10px 20px;
+border-radius: 10px;
+margin: 5px;
+cursor: pointer;
+}

@@ -1,0 +1,20 @@
+/* HomePage.css */
+
+.meme-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.meme-card {
+  width: 180px;
+  min-height: 250px;
+  margin: 0.5rem;
+}
+
+.meme-image {
+  height: 150px;
+  object-fit: cover;
+}

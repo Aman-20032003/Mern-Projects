@@ -12,7 +12,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 
 app.use(cors({
-  origin:'http://127.0.0.1:5500',
+  origin:'http://localhost:5174',
   credentials:true
 }));
 
@@ -35,18 +35,18 @@ app.get('/user/validate', (req, res) => {
 
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
-    console.log("Decoded token:", decoded); // ✅ Debugging
+    console.log("Decoded token:", decoded); 
 
     return res.status(200).json({
       success: true,
-      userId: decoded.id, // ✅ will now work if above fix is applied
+      userId: decoded.id, 
       email: decoded.email
     });
   } catch (err) {
-    console.error("Token verification error:", err); // ✅ Log the error
+    console.error("Token verification error:", err); 
     return res.status(401).json({ message: "Invalid or expired token" });
   }
 });
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}......`);
 });
